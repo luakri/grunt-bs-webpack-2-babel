@@ -16,9 +16,17 @@ const moduleOptions = {
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
                 'drop_console': true
+            },
+            output: {
+                comments: false,
+            }
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
             }
         })
-    ],
+    ]
 };
 
 const options = webpackMerge(commonConfig, moduleOptions);

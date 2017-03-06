@@ -1,4 +1,4 @@
-let Component1 = require('./components/component1/index');
+import Component1 from './components/component1/index';
 
 let comp = new Component1();
 

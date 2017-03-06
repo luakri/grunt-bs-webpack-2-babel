@@ -20,4 +20,4 @@ class Component {
     }
 }
 
-module.exports = Component;
+export default Component;

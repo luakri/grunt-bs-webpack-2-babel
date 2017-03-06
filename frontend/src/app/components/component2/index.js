@@ -8,4 +8,4 @@ class Singleton {
     }
 }
 
-module.exports = new Singleton();
+export default new Singleton();
