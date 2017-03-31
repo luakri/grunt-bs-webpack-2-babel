@@ -1,8 +1,9 @@
 /*global describe:true, it:true, expect:true, afterEach: true, beforeEach:true */
 
+import Component from '../index';
+
 describe('# Component1', function() {
 
-    let Component = require('../index');
     let component = null;
 
     beforeEach(function() {

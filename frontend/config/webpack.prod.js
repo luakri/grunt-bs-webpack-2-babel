@@ -9,16 +9,16 @@ const moduleOptions = {
 
     output: {
         path: root(getPath('js', false, true)),
-        filename: 'main.js',
+        filename: '[name].js',
     },
 
     plugins: [
         new webpack.optimize.UglifyJsPlugin({
             compressor: {
-                'drop_console': true
+                //'drop_console': true
             },
             output: {
-                comments: false,
+                comments: false
             }
         }),
         new webpack.DefinePlugin({

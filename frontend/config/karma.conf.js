@@ -1,60 +1,49 @@
+process.env.BABEL_ENV = 'test';
+
 const config = require('./index');
-const webpackConfig = require('./webpack.test.config.js');
+const webpackConfig = require('./webpack.dev.js');
 
 const jsApp = config.PATHS.JS;
-let processFiles = {};
 
-processFiles['tests/unit/index.js'] = ['webpack'];
-processFiles[jsApp + 'components/**/*.js'] = ['webpack'];
-processFiles[jsApp + 'main.js'] = ['webpack'];
+const testGlob = jsApp + '**/*.test.js';
+const srcGlob = jsApp + '**/!(*.test|*.stub).js';
+
+// webpack chunkNames not compatible with karma.
+const commonsChunkPluginIndex = webpackConfig.plugins.findIndex(plugin => plugin.chunkNames);
+webpackConfig.plugins.splice(commonsChunkPluginIndex, 1);
 
 module.exports = function (config) {
 
     config.set({
-        basePath : '../src',
+        basePath: '../src',
         frameworks: ['jasmine'],
-        browsers: ['PhantomJS'],
-
-        keepalive: true,
-        autoWatch : true,
-        singleRun : false,
-
-        port: 9876,
-        runnerPort: 9100,
-        colors: true,
-        captureTimeout: 5000,
-
-        reporters: ['spec', 'coverage'],
-
-        preprocessors: processFiles,
-
-        coverageReporter: {
-            type : 'lcov',
-            dir : '../reports/coverage'
+        files: [testGlob, srcGlob],
+        preprocessors: {
+            [testGlob]: ['webpack'],
+            [srcGlob]: ['webpack'],
         },
-
         webpack: webpackConfig,
-        webpackMiddleware: {
-            noInfo: true
+        webpackMiddleware: {noInfo: true},
+        reporters: ['progress', 'coverage'],
+        coverageReporter: {
+            check: {
+                global: {
+                    statements: 11,
+                    branches: 0,
+                    functions: 0,
+                    lines: 11,
+                }
+            },
+            reporters: [
+                {type: 'lcov', dir: '../reports/coverage', subdir: '.'}
+            ]
         },
-
-        specReporter: {
-            maxLogLines: 5,
-            suppressErrorSummary: true,
-            suppressFailed: false,
-            suppressPassed: false,
-            suppressSkipped: true
-        },
-
-        exclude: [],
-
-        files: [
-            // Libs.
-            jsApp + 'vendor/jquery-2.2.1.js',
-            jsApp + 'vendor/modernizr.min.js',
-
-            // All the Tests.
-            'tests/unit/index.js'
-        ]
+        port: 9876,
+        colors: true,
+        logLevel: config.LOG_INFO,
+        autoWatch: false,
+        browsers: ['PhantomJS'],
+        singleRun: true,
+        concurrency: Infinity
     });
 };

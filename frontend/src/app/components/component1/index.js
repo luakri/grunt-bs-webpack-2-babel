@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import component2 from '../component2';
 
 /**
@@ -11,6 +12,8 @@ class Component {
      */
     constructor() {
         console.log('component constructor init');
+
+        console.log($('h1').text());
 
         component2.render('test');
     }

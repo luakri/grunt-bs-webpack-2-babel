@@ -8,7 +8,7 @@ const moduleOptions = {
     devtool: 'eval',
 
     entry: {
-        app: [
+        main: [
             'webpack-hot-middleware/client?reload=true'
         ]
     },
@@ -16,7 +16,8 @@ const moduleOptions = {
     output: {
         publicPath: '/app',
         path: root(getPath('js', false, true)),
-        filename: 'main.js',
+        filename: '[name].js',
+        pathinfo: true,
     },
 
     plugins: [

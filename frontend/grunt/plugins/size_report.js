@@ -2,7 +2,7 @@ const getPath = require('../../config/util/getPath');
 
 const setOptions = (isLibs) => {
 
-    const fileName = isLibs ? 'vendor/libs.js' : 'main.js';
+    const fileName = isLibs ? 'libs.js' : 'main.js';
 
     const type = isLibs ? 'Libs' : 'App';
 
