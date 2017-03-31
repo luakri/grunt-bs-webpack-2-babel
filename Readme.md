@@ -42,3 +42,5 @@ Requirements
 * ```grunt server ``` to serve the distribution files.
 
 * ```grunt server --isProd``` to serve the production files - Webpack is a Browsersync middleware, to use grunt server bypassing Webpack, param --isProd needs to be passed.
+
+* ```grunt unit ``` to run unit tests using Karma + Webpack + PhantomJS + Code Coverage non transpiled code.
