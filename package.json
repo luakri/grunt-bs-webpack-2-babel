@@ -5,12 +5,16 @@
   "private": true,
   "scripts": {
     "start": "rm -fr node_modules && npm cache clean && npm set progress=false && time npm install",
-    "precommit": "grunt js-lint"
+    "lint": "grunt js-lint",
+    "validate": "npm ls"
   },
   "engine-strict": true,
   "engines": {
     "node": "7.7.1"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "devDependencies": {
     "autoprefixer": "6.3.3",
     "babel-core": "6.23.1",
@@ -36,7 +40,6 @@
     "grunt-sass": "1.1.0",
     "grunt-size-report": "0.1.4",
     "grunt-timer": "0.6.0",
-    "husky": "^0.13.3",
     "jasmine-core": "2.4.1",
     "jit-grunt": "0.10.0",
     "karma": "1.5.0",
@@ -46,6 +49,7 @@
     "karma-webpack": "2.0.3",
     "load-grunt-config": "0.19.2",
     "minimist": "1.2.0",
+    "precommit-hook": "3.0.0",
     "progress-bar-webpack-plugin": "1.9.0",
     "webpack": "2.2.1",
     "webpack-dev-middleware": "1.8.4",
